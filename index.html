@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FloSo · The Growth Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F6F4EC; --panel:#ECEAE0; --ink:#15181A; --ink2:#222A26;
+  --gold:#6B8E3F; --goldr:#55732F; --goldsoft:#E4EDD6;
+  --teal:#246B5E; --rust:#B85533; --slate:#5C6675; --green:#5E7B57;
+  --txt:#211E16; --mut:#6E6857; --card:#FFFFFF; --cardbd:#E3DDCC;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',"Helvetica Neue",Arial,sans-serif;background:var(--cream);color:var(--txt);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+
+header.nav{position:sticky;top:0;z-index:50;background:rgba(246,244,236,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--cardbd)}
+.nav .wrap{display:flex;align-items:center;gap:8px;height:62px}
+.brand{font-weight:800;letter-spacing:.3px;margin-right:auto;font-size:16px;color:var(--ink);display:flex;align-items:center;gap:10px}
+.brand .mono{width:32px;height:32px;border-radius:8px;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+.brand .dot{color:var(--gold)}
+.nav a.link{font-size:13.5px;font-weight:600;color:var(--mut);padding:8px 11px;border-radius:8px}
+.nav a.link:hover{color:var(--ink);background:var(--panel)}
+@media(max-width:1040px){.nav a.link{display:none}}
+
+.hero{padding:56px 0 26px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase}
+h1{font-size:54px;line-height:1.04;color:var(--ink);margin:14px 0 12px;letter-spacing:-1.2px;font-weight:300}
+h1 b{font-weight:800}
+.lede{font-size:20px;color:var(--mut);max-width:780px}
+@media(max-width:680px){h1{font-size:36px}}
+.herostats{display:flex;gap:34px;flex-wrap:wrap;margin-top:26px}
+.herostats .s b{font-size:30px;font-weight:800;color:var(--ink);display:block;line-height:1}
+.herostats .s span{font-size:12px;color:var(--mut);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+
+section{padding:30px 0}
+.sec-head{margin-bottom:20px}
+.sec-head .eyebrow{font-size:12px;letter-spacing:2px}
+.sec-head h2{font-size:30px;color:var(--ink);margin-top:6px;letter-spacing:-.5px}
+.sec-head p{color:var(--mut);margin-top:6px;max-width:820px}
+.hint{font-size:12.5px;color:var(--gold);font-weight:700;margin-top:8px}
+
+.stack>*{margin-bottom:14px}
+.band{background:var(--panel);border:1px solid var(--cardbd);border-radius:16px;padding:18px 20px;position:relative}
+.band.rail{border-left:7px solid var(--gold)}
+.band h3{font-size:18px;color:var(--ink)}
+.band .sub{color:var(--mut);font-size:14px;margin-top:2px}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:18px}
+@media(max-width:560px){.pillars{grid-template-columns:1fr 1fr}}
+.pillar{background:var(--card);border:1px solid var(--cardbd);border-radius:10px;padding:13px 15px;cursor:pointer;transition:.15s}
+.pillar:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.pillar b{display:block;color:var(--ink);font-size:15px}
+.pillar span.d{font-size:12.5px;color:var(--mut)}
+.pillar .tk{float:right;color:var(--gold);font-weight:800;font-size:13px}
+
+.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin:18px 0}
+@media(max-width:980px){.pipeline{grid-template-columns:repeat(2,1fr)}}
+.phase{background:var(--card);border:1px solid var(--cardbd);border-radius:14px;padding:16px;cursor:pointer;transition:.15s;border-top:7px solid var(--gold)}
+.phase:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,0,0,.09)}
+.phase .pno{font-size:12.5px;font-weight:800;color:var(--gold);letter-spacing:.5px}
+.phase h4{font-size:19px;color:var(--ink);margin:5px 0 6px}
+.phase .meta{font-size:13px;color:var(--mut)}
+.phase .team{font-size:12.5px;font-weight:700;margin-top:8px}
+
+.ribbon{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:14px}
+@media(max-width:980px){.ribbon{display:none}}
+.ribbon .seg{border:1.4px solid var(--cardbd);border-radius:9px;text-align:center;padding:8px;font-weight:800;font-size:13px}
+.ribbon .lab{display:flex;align-items:center;font-size:13px;font-weight:800;color:var(--mut)}
+
+.band.dark{background:var(--ink);color:#E9E6DE;cursor:pointer}
+.band.dark h3{color:var(--gold)}
+.band.dark .sub{color:#C9C5BB}
+.band.teal{border-color:var(--teal)}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px}
+@media(max-width:760px){.modes{grid-template-columns:1fr}}
+.mode{background:var(--panel);border:1px solid var(--cardbd);border-radius:14px;padding:18px}
+.mode b{color:var(--ink);font-size:18px}
+.mode p{color:var(--mut);font-size:14.5px;margin-top:6px}
+
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:1080px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.agent{background:var(--card);border:1px solid var(--cardbd);border-radius:14px;overflow:hidden;cursor:pointer;transition:.15s;display:flex;flex-direction:column}
+.agent:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.10)}
+.agent .rule{height:6px}
+.agent .top{background:var(--ink);color:#fff;padding:13px 15px;display:flex;align-items:center;gap:11px}
+.agent .no{width:34px;height:34px;border-radius:50%;border:2px solid var(--gold);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:12.5px;flex:0 0 auto}
+.agent .top b{font-size:15px}
+.agent .body{padding:13px 15px}
+.agent .trg{font-size:11px;font-weight:800;letter-spacing:1px;color:var(--gold)}
+.agent .trgv{font-size:13.5px;color:var(--txt);margin:2px 0 10px}
+.agent .ho{font-size:12.5px;color:var(--mut)}
+.agent .ho b{color:var(--ink)}
+.agent .more{margin-top:11px;font-size:12px;font-weight:700;color:var(--gold)}
+
+.loops{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:820px){.loops{grid-template-columns:1fr}}
+.loop{background:var(--card);border:1px solid var(--cardbd);border-radius:16px;padding:18px;display:flex;gap:16px;cursor:pointer;transition:.15s;border-top:7px solid var(--gold);align-items:center}
+.loop:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.10)}
+.loop .ring{flex:0 0 200px}
+.loop h4{font-size:21px;color:var(--ink)}
+.loop .why{font-size:11px;font-weight:800;letter-spacing:1px;margin:8px 0 4px}
+.loop p{font-size:15px;color:var(--txt)}
+.loop .pw{display:inline-block;margin-top:10px;background:var(--goldsoft);border:1px solid var(--cardbd);border-radius:8px;padding:6px 12px;font-size:13px;font-weight:700;color:var(--ink2)}
+@media(max-width:560px){.loop{flex-direction:column}.loop .ring{flex:none;width:200px}}
+
+.hero-eq{background:var(--ink);color:#fff;border-radius:16px;padding:30px;text-align:center}
+.hero-eq .l1{font-size:28px;font-weight:800;font-family:"Courier New",monospace}
+.hero-eq .l2{font-size:20px;color:#E9E6DE;font-family:"Courier New",monospace;margin-top:12px}
+.hero-eq .l3{font-size:15px;color:var(--gold);margin-top:16px}
+@media(max-width:680px){.hero-eq .l1{font-size:17px}.hero-eq .l2{font-size:13px}}
+.terms{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
+@media(max-width:1080px){.terms{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.terms{grid-template-columns:1fr}}
+.term{background:var(--card);border:1px solid var(--cardbd);border-radius:14px;padding:16px;border-top:7px solid var(--gold)}
+.term b{color:var(--ink);font-size:17px}
+.term .f{background:var(--panel);border-radius:8px;padding:10px;font-family:"Courier New",monospace;font-size:12.5px;font-weight:700;color:var(--ink2);margin:10px 0;line-height:1.45}
+.term .lv{font-size:11px;font-weight:800;letter-spacing:1px}
+.term .lvv{font-size:14px;color:var(--txt)}
+.term .ag{font-size:12.5px;color:var(--mut);font-weight:700;margin-top:6px}
+.guard{margin-top:20px;background:var(--panel);border:1px solid var(--cardbd);border-left:7px solid var(--gold);border-radius:12px;padding:16px 20px}
+.guard b{font-size:13px;font-weight:800;letter-spacing:2px;color:var(--gold)}
+.guard .g{font-size:17px;font-weight:700;color:var(--ink2);margin-top:6px}
+
+footer{padding:40px 0 60px;color:var(--mut);font-size:13px;border-top:1px solid var(--cardbd);margin-top:20px}
+
+.overlay{position:fixed;inset:0;background:rgba(21,24,26,.55);display:none;align-items:center;justify-content:center;z-index:100;padding:24px}
+.overlay.open{display:flex}
+.modal{background:var(--cream);border-radius:18px;max-width:640px;width:100%;max-height:88vh;overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.modal .mtop{color:#fff;padding:20px 24px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:2}
+.modal .mno{width:42px;height:42px;border-radius:50%;border:2.5px solid #fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex:0 0 auto}
+.modal .mtop h3{font-size:21px}
+.modal .mtop .tag{margin-left:auto;font-weight:800;font-size:13px}
+.modal .x{cursor:pointer;color:#fff;font-size:26px;line-height:1;opacity:.85;margin-left:8px}
+.modal .x:hover{opacity:1}
+.mbody{padding:22px 24px}
+.mdesc{font-size:16px;line-height:1.6;color:var(--txt)}
+.mlabel{font-size:11px;font-weight:800;letter-spacing:1.5px;color:var(--gold);margin:16px 0 6px}
+.bul{list-style:none;margin:4px 0 0;padding:0}
+.bul li{font-size:14.5px;padding:6px 0 6px 18px;position:relative;border-bottom:1px solid var(--cardbd)}
+.bul li::before{content:"";position:absolute;left:0;top:13px;width:7px;height:7px;border-radius:2px;background:var(--gold)}
+.mtrg{font-size:15px;margin:3px 0 16px}
+.step{background:var(--card);border:1px solid var(--cardbd);border-radius:9px;padding:11px 13px;margin-bottom:9px;display:flex;gap:12px;align-items:flex-start}
+.step .sn{width:24px;height:24px;border-radius:50%;border:1.6px solid var(--goldr);color:var(--ink2);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;margin-top:1px}
+.step b{display:block;font-size:14.5px;color:var(--txt)}
+.step .tool{font-size:12.5px;color:var(--gold);font-weight:700}
+.step .tool:before{content:"▸ "}
+.gate{background:var(--goldsoft);border:1px solid var(--goldr);border-radius:10px;padding:12px 14px;margin:14px 0}
+.gate .gl{font-size:11px;font-weight:800;letter-spacing:1px;color:var(--goldr)}
+.gate b{font-size:15px;color:var(--ink2)}
+.gate .gt{font-size:12.5px;color:var(--goldr);font-weight:700;float:right}
+.hoff{background:var(--ink);color:#fff;border-radius:10px;padding:12px 14px;margin-bottom:12px}
+.hoff .hl{font-size:11px;font-weight:800;letter-spacing:1px;color:var(--gold)}
+.hoff b{font-size:15px}
+.escal{border:1.4px solid var(--rust);border-left:6px solid var(--rust);border-radius:10px;padding:11px 14px}
+.escal .el{font-size:11px;font-weight:800;letter-spacing:1px;color:var(--rust)}
+.escal span{font-size:14px;color:var(--ink2)}
+.pwbox{display:inline-block;margin-top:14px;background:var(--goldsoft);border-radius:8px;padding:7px 13px;font-size:13px;font-weight:700;color:var(--ink2)}
+.jump{display:inline-block;margin-top:16px;background:var(--ink);color:#fff;padding:10px 16px;border-radius:9px;font-weight:700;font-size:14px;cursor:pointer}
+/* value ladder */
+.ladder{display:grid;gap:10px;margin-top:6px}
+.rung{border:1px solid var(--cardbd);border-radius:12px;overflow:hidden;background:var(--card)}
+.rung .rh{padding:11px 14px;color:#fff;display:flex;align-items:center;gap:10px}
+.rung .rh .lv{font-size:10.5px;font-weight:800;letter-spacing:1px;opacity:.9}
+.rung .rh b{font-size:15px}
+.rung .rh .pr{margin-left:auto;font-weight:800;font-size:14px}
+.rung .rb{padding:10px 14px;font-size:13.5px;color:var(--txt)}
+.funnel3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:820px){.funnel3{grid-template-columns:1fr}}
+.fstage{background:var(--card);border:1px solid var(--cardbd);border-radius:14px;padding:18px 20px;border-top:7px solid var(--gold)}
+.fstage .ft{font-size:11px;font-weight:800;letter-spacing:1px}
+.fstage h4{font-size:19px;color:var(--ink);margin:5px 0 8px}
+.fstage p{font-size:14px;color:var(--txt);margin:3px 0}
+.fstage .a{font-size:12.5px;color:var(--mut);margin-top:9px;border-top:1px solid var(--cardbd);padding-top:9px}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="wrap">
+  <div class="brand"><span class="mono">FSI</span>FloSo<span class="dot">.us</span> · Growth Engine</div>
+  <a class="link" href="#foundation">Foundation</a>
+  <a class="link" href="#offers">Offers</a>
+  <a class="link" href="#funnels-sec">Funnel</a>
+  <a class="link" href="#team">Sales &amp; Success</a>
+  <a class="link" href="#refinement">Refinement</a>
+  <a class="link" href="#loops">Loops</a>
+  <a class="link" href="#model">Model</a>
+</div></header>
+
+<div class="wrap hero">
+  <div class="eyebrow">Flourishing Solutions International · Growth Engine</div>
+  <h1>One Engine. <b>Six Phases.</b><br>An AI team that compounds.</h1>
+  <p class="lede">A shared Brain feeds the funnel; the funnel feeds customers; happy customers feed the Brain. Every box below is built or building — <b>click any of them</b> to see what's inside.</p>
+  <div class="herostats">
+    <div class="s"><b>8</b><span>Sales &amp; success agents</span></div>
+    <div class="s"><b>2</b><span>Products · 2 funnels</span></div>
+    <div class="s"><b>4</b><span>Compounding loops</span></div>
+    <div class="s"><b>draft-first</b><span>Human approves every send</span></div>
+  </div>
+</div>
+
+<section class="wrap" id="foundation"><div class="stack">
+
+  <div class="band rail">
+    <h3>Phase 1 · Foundation</h3>
+    <div class="sub">The shared Brain every agent reads from before it acts — click a pillar to see FSI's.</div>
+    <div class="pillars" id="pillars"></div>
+  </div>
+
+  <div class="ribbon" id="ribbon"></div>
+  <div class="pipeline" id="pipeline"></div>
+
+  <div class="band teal" style="border-width:1.5px;cursor:pointer" onclick="openInfo('orchestration')"><h3>AI Orchestration Layer</h3>
+    <div class="sub">agents · tools / MCP — Notion · Apify · GoHighLevel · Instantly · HubSpot · Granola · Slack · shared memory · draft-first human gate</div></div>
+
+  <div class="band" style="cursor:pointer" onclick="openInfo('revops')"><h3>Data &amp; Measurement · RevOps spine</h3>
+    <div class="sub">CAC · LTV:CAC · NRR · payback · per-phase KPIs · attribution — instrumented under every phase by Agent 06 + the weekly metrics snapshot</div></div>
+
+  <div class="band dark" onclick="location.hash='#refinement'">
+    <h3>↺ Close-the-Loop Refinement Team</h3>
+    <div class="sub">signal in → analyze → approve → write to Brain → every agent inherits the upgrade (R1–R6) — click to explore</div></div>
+
+  <div class="modes">
+    <div class="mode"><b>Run it — FSI's own brands</b><p>The engine runs FSI's own offers end to end. iHub-only is already the second funnel on the same machine today.</p></div>
+    <div class="mode"><b>Repeat it — as a service</b><p>The same AI team is config-driven and isolatable per business — a productized, repeatable offering for outside clients.</p></div>
+  </div>
+
+</div></section>
+
+<section class="wrap" id="offers">
+  <div class="sec-head"><div class="eyebrow">Phase 2 · The Offer · Value Ladder</div>
+    <h2>Two products, one ladder</h2>
+    <p>A free guide earns attention, iHub captures budget churches, iHub + THRIVE is the flagship, white-glove maximizes LTV. <b>Click a rung</b> for the offer.</p></div>
+  <div class="ladder" id="ladder"></div>
+</section>
+
+<section class="wrap" id="funnels-sec">
+  <div class="sec-head"><div class="eyebrow">Phase 3 · The Funnel</div>
+    <h2>TOFU → MOFU → BOFU</h2>
+    <p>Give something genuinely useful, build trust, then earn the decision — for both products, on one engine.</p></div>
+  <div class="funnel3" id="funnel3"></div>
+</section>
+
+<section class="wrap" id="team">
+  <div class="sec-head"><div class="eyebrow">PADRE · Acquire → Deploy → Retain → Expand</div>
+    <h2>The 8-Agent Sales &amp; Success Team</h2>
+    <p>One roster from first touch to renewal. Agent 06 (CRM / RevOps) is the connective tissue; Agent 08 feeds referrals back to Agent 01.</p>
+    <div class="hint">Click any agent for its trigger → steps → approval gate → handoff → escalation.</div></div>
+  <div class="grid" id="grid-sales"></div>
+</section>
+
+<div class="wrap" style="display:flex;align-items:center;gap:14px;margin-top:30px">
+  <span style="font-size:13px;font-weight:800;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase">What's Next →</span>
+  <span style="flex:1;height:1px;background:var(--cardbd)"></span>
+</div>
+
+<section class="wrap" id="refinement">
+  <div class="sec-head"><div class="eyebrow">Close-the-Loop Refinement Team · Rewrites the Brain</div>
+    <h2>The 6-Agent Refinement Loop</h2>
+    <p>Signal becomes learning — written back so every team inherits it. R6 (the Librarian) is the only agent that writes to the Brain, with human sign-off. <em>Agent 06 + weekly metrics is the live foundation of this; the full loop is the architecture we grow into.</em></p>
+    <div class="hint">Click any agent to see how a signal becomes an approved change.</div></div>
+  <div class="grid" id="grid-ref"></div>
+</section>
+
+<section class="wrap" id="loops">
+  <div class="sec-head"><div class="eyebrow">What Compounds</div>
+    <h2>The Four Growth Loops</h2>
+    <p>Each loop reinvests its own output into its next input — that's what makes it an engine, not a funnel.</p>
+    <div class="hint">Click a loop for its compounding mechanism.</div></div>
+  <div class="loops" id="loops-grid"></div>
+</section>
+
+<section class="wrap" id="model">
+  <div class="sec-head"><div class="eyebrow">The Math</div>
+    <h2>The Growth Model</h2>
+    <p>If you can't write the equation, you can't tune the engine — here's where it compounds.</p></div>
+  <div class="hero-eq">
+    <div class="l1">ARR(next) = ARR(now) × NRR + New ARR</div>
+    <div class="l2">New ARR = sum over channels of ( Volume × Conversion × ACV )</div>
+    <div class="l3">The loops set the multipliers — Guides lift Volume for free · Referral adds K-factor · Paid scales while LTV:CAC&gt;3 · Expansion (iHub → THRIVE) drives NRR</div>
+  </div>
+  <div class="terms" id="terms"></div>
+  <div class="guard"><b>GUARDRAILS</b><div class="g">LTV : CAC ≥ 3 &nbsp;·&nbsp; Payback &lt; 12 months &nbsp;·&nbsp; NRR &gt; 100% &nbsp;·&nbsp; CAC trending down period over period</div></div>
+</section>
+
+<footer><div class="wrap">FloSo · The Growth Engine — interactive architecture for FSI's AI Sales &amp; Success team. Every team reads the shared Brain and writes back through the loop.</div></footer>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modal"></div>
+</div>
+
+<script>
+const C={gold:'#6B8E3F',teal:'#246B5E',rust:'#B85533',slate:'#5C6675',ink:'#15181A'};
+
+/* ---------- foundation ---------- */
+const PILLARS=[
+ ['icp','ICP','growth-minded churches + fit filter','Who FSI serves and the green/red fit filter every agent scores against.',
+   ['Protestant churches, ~200–2,000, contemporary / multi-service, discipleship-minded, tech-open','Geography is NOT a filter — nationwide','Green lights: new lead pastor, multisite, networks (Acts 29 / ARC / EFCA), hiring discipleship roles','Red lights: tiny + no budget, no web presence, do-not-contact']],
+ ['brain','Organization Brain','single source of truth','The FSI Sales & Success Brain in Notion — voice, positioning, offers, and rules every agent reads before acting.',
+   ['Lives in Notion; every agent reads it first','Only the Refinement Librarian (R6) writes to it, with human sign-off','Carries ICP, offers, proof, and messaging in one place']],
+ ['brand','Brand / Voice','how it sounds','The THRIVE voice and standards every asset is checked against.',
+   ['Warm, hopeful, research-backed, pastor-to-pastor','“Flourish where you are. Champion the flourishing of others.”','Help-first — never salesy; cold copy stays plain + personal']],
+ ['narrative','Narrative & Proof','positioning + proof library','The story FSI tells, plus the living proof that backs it.',
+   ['Story: all-week connection is what makes a church flourish (Harvard flourishing research)','Proof library: pilot stories (capturing now), the research, founding-church framing','Refilled continuously by Success → through the loop']],
+ ['coldemail','Cold Email Setup','deliverability + sending infra','The outbound infrastructure that makes cold outreach actually land — isolated from the brand domain.',
+   ['3 warmed lookalike domains (getfloso · tryfloso · flosochurch)','9 dedicated sending inboxes in rotation','SPF / DKIM / DMARC verified · Instantly warm-up (2–4 wks)','Reply-driven, plain-text — never risks floso.us']]
+];
+
+/* ---------- pipeline phases ---------- */
+const PHASES=[
+ {id:'offer',no:'Phase 2',name:'Offer',meta:'Value Ladder',team:'Free guide → iHub → THRIVE → white-glove',color:C.gold,jump:'#offers',jumpName:'the ladder',
+   desc:'What FSI sells and at what value — a free guide to capture, iHub to monetize budget churches, iHub + THRIVE as the flagship, and white-glove for maximum LTV + proof.'},
+ {id:'funnels',no:'Phase 3',name:'Funnel',meta:'TOFU · MOFU · BOFU',team:'Two funnels · one engine',color:C.gold,jump:'#funnels-sec',jumpName:'the funnel',
+   desc:'Demand capture across the funnel — free guides up top, demo + Grace AI + a network-leader webinar in the middle, then Grace AI’s sales portal or a real call at the bottom. Run for both products.'},
+ {id:'sales',no:'Phase 4',name:'Sales',meta:'Acquire',team:'Agents 01–06',color:C.teal,jump:'#team',jumpName:'the team',
+   desc:'Turn engaged churches into customers — research, audit, outreach, reply triage, booking, proposal — with RevOps keeping every handoff clean.'},
+ {id:'success',no:'Phase 5',name:'Success',meta:'Deploy · Retain',team:'Agents 07–08',color:C.slate,jump:'#team',jumpName:'the team',
+   desc:'Deliver first value fast and sustain it — onboarding, health, support, renewal. Where recurring revenue and proof assets are created.'},
+ {id:'expand',no:'Phase 6',name:'Expand',meta:'Extend · Expand',team:'Upsell · referral · NRR',color:C.rust,jump:'#loops',jumpName:'the loops',
+   desc:'Grow revenue without new logos — iHub → iHub + THRIVE upsell, renewals, and referrals. Where NRR compounds.'}
+];
+const PADRE=[['',''],['PROSPECT',C.gold],['ACQUIRE',C.teal],['DEPLOY · RETAIN',C.slate],['EXPAND',C.rust]];
+
+/* ---------- value ladder ---------- */
+const LADDER=[
+ {lv:'LEVEL 1 · Freemium',name:'Free field guides',price:'Free',color:C.gold,body:'“The Six Pathways to a Flourishing Life” (THRIVE) and “The Connected Church” + 5-minute audit (iHub). Capture attention, earn the opt-in, build trust.'},
+ {lv:'LEVEL 2 · Premium',name:'iHub  ·  iHub + THRIVE',price:'$50 / $199 per mo',color:C.teal,body:'Two core SaaS offers. <b>iHub</b> — all-week engagement + one front door · $50/mo ($600/yr) · budget churches & downsell. &nbsp;<b>iHub + THRIVE</b> — the flagship · done-for-you discipleship content + engagement · $199/mo ($2,400/yr).'},
+ {lv:'LEVEL 3 · Leveraged',name:'Online trainings & workshops',price:'Scalable',color:C.slate,body:'Group programs that reach many churches at once — live and on-demand trainings and workshops that scale margin and deepen the relationship.'},
+ {lv:'LEVEL 4 · High-Touch',name:'White-glove / meta-network rollouts',price:'Custom',color:C.rust,body:'Hands-on rollouts across multisite churches and meta-networks (denominations / associations) — maximum LTV, and the richest source of proof stories.'}
+];
+const FUNNEL=[
+ {t:'TOFU · Awareness',color:C.gold,h:'Free field guides',lines:['“The Six Pathways to a Flourishing Life” (THRIVE)','“The Connected Church” + 5-min audit (iHub)'],a:'Value first — opt-in, no pitch'},
+ {t:'MOFU · Consideration',color:C.teal,h:'Demo + show the fit',lines:['Demo + Grace AI concierge','Frontline Network Leader webinar'],a:'Build trust — earn the conversation'},
+ {t:'BOFU · Decision',color:C.rust,h:'Close with Grace',lines:['Sales portal from Grace AI','…or a call with the real Grace'],a:'Decision — buy or book'}
+];
+
+/* ---------- agents ---------- */
+function agent(no,name,trg,steps,gate,gtool,hoff,esc,color){return {no,name,trg,steps,gate,gtool,hoff,esc,color};}
+const SALES=[
+ agent('01','Lead Research + Enrichment','Targeting-queue run / on-demand',[['Read Brain + ICP rubric','Notion'],['Find fit-churches from trusted sources','Web research'],['Enrich org + contact','Apify · Composio'],['Score fit + draft the lead','Notion']],'Write rows to Leads (Drafts)','Notion · Leads DB','High-fit Lead → Audit','Do-not-contact / geography misread',C.gold),
+ agent('02','Website / Digital Audit','New Lead row (event)',[['Read the Lead + Brain','Notion'],['Review site & digital presence','Web'],['Find the gaps + the honest angle','Notion AI'],['Pick the angle','Notion']],'Write the Audit row','Notion · Audits DB','Audit + angle → Outreach','Research only — nothing sent',C.gold),
+ agent('03','Personalized Outreach','New Audit row · funnel-aware',[['Read Lead + Audit + voice','Notion'],['Draft to the gap (TOFU value / MOFU / BOFU)','Notion AI'],['Cold → Instantly · warm → GHL','Instantly · GHL'],['Hold as Draft','Notion · Outreach DB']],'Approve → cold via warmed domains','Instantly · GHL','Reply received → SDR','Deliverability / spam flags',C.gold),
+ agent('04','SDR · Reply Triage · Booking','Inbound reply + sweeps',[['Classify reply + intent','Notion AI'],['Draft the response','Instantly unibox · GHL'],['Re-engage non-responders (A/B)','04b avatar · 04c email'],['Send Grace’s booking link','HubSpot']],'Book the call with Grace','HubSpot · Notion','Qualified call booked → Prep','Objection / pricing / risk',C.teal),
+ agent('05','Call Prep + Proposal','Call booked / call done',[['Read Lead, Audit, history','Notion'],['Pre-call brief from transcript','Granola'],['Draft follow-up + proposal','Notion AI'],['Tailor pilot to the audit gaps','Notion']],'Approve → send follow-up','Notion · Mail','Proposal accepted → Won','Pricing, discounts, terms',C.teal),
+ agent('06','CRM / RevOps','Daily + on every stage change',[['Scan all databases','Notion'],['Flag stale / dirty rows','Notion'],['Refresh KPIs + dashboards','Notion'],['Write the weekly metrics snapshot','Notion']],'Post the daily digest','Slack · #revops-digest','Keeps every handoff clean','Bulk overwrite / delete',C.ink),
+ agent('07','Onboarding','Deal → Closed-Won (event)',[['Create the Customer record','Notion'],['Build kickoff + checklist','Notion'],['Assign tasks + owners','Notion'],['Draft welcome emails','GHL']],'Approve → send; track launch','Notion · GHL','Onboarded & live → Success','Anything unusual in setup',C.slate),
+ agent('08','Success + Renewal','Weekly pass + support message',[['Update health + MRR','Notion'],['Triage support (draft)','Slack · GHL'],['Flag renewal risk early','Notion'],['Surface upsell (iHub → THRIVE) + referral','Notion']],'Approve → send check-ins','GHL · Mail','Referral → new Lead (01)','Billing, cancel, legal',C.rust)
+];
+const REF=[
+ agent('R1','Signal Aggregator','Nightly / continuous',[['Pull replies · bookings · calls','Notion · Instantly'],['Pull support · health · funnel','Notion · Slack'],['Normalize into a Signal view','Notion'],['Tag by phase + segment','Notion']],'Write the Signal view','Notion','Clean signal → Analysts','Source outage / data gap',C.slate),
+ agent('R2','Win/Loss + Churn Analyst','Weekly + on Lost / Churn',[['Read signal + Win/Loss Log','Notion'],['Cluster win / loss / churn reasons','Notion AI'],['Quantify by segment / offer','Notion'],['Draft findings','Notion AI']],'Post findings to review','Notion · Win/Loss Log','Findings → R3 / R4 / R5','Thin sample — flag, don’t conclude',C.slate),
+ agent('R3','ICP Refinement','Monthly + strong signal',[['Read findings + current ICP','Notion'],['Spot best / worst-fit churches','Notion AI'],['Draft ICP + fit-filter update','Notion'],['Tag new do-not-contact patterns','Notion']],'Approve ICP change','Notion · Brain','Approved → Brain Librarian','Conflicts with strategy',C.slate),
+ agent('R4','Offer + Pricing','Monthly + margin / CVR shift',[['Read iHub vs THRIVE performance','Notion'],['Model reprice / repackage','Notion AI'],['Estimate expected impact','Notion'],['Draft recommendation','Notion AI']],'Approve offer change','Notion','Approved → Librarian + Agent 03','Pricing / discount — human only',C.slate),
+ agent('R5','Message + Narrative','Ongoing + campaign results',[['Read reply + win/loss language','Notion'],['Find resonant / dead claims','Notion AI'],['Draft narrative + proof updates','Notion'],['Queue A/B tests','Notion']],'Approve message change','Notion','Approved → Librarian + Agent 03','Claim lacks proof',C.slate),
+ agent('R6','Brain Librarian','On any approved change',[['Prioritize tests (ICE)','Notion'],['Write the change to the Brain','Notion · Brain'],['Version + log owner / date','Notion'],['Notify affected agents','Slack']],'Final human sign-off → write','Notion · Brain','Updated Brain → all teams','Wide-blast change → senior sign-off',C.gold)
+];
+
+/* ---------- loops + model ---------- */
+const LOOPS=[
+ {name:'Guide / Content Loop',color:C.gold,nodes:['Publish guide','Opt-ins','Nurture → demo','Learn & refine'],why:'Each free guide keeps pulling opt-ins; every conversion teaches which message lands.',powered:'Powered by  Agent 03 · the funnels',detail:'The free guides (“Six Pathways”, “Connected Church”) keep capturing opt-ins at near-zero marginal cost, and every opt-in that converts teaches which angle resonates — so the next touch is sharper. The catalogue keeps working after it ships.'},
+ {name:'Referral / Flywheel Loop',color:C.teal,nodes:['Deliver outcome','Happy church','Referral + proof','New lead'],why:'Every church that flourishes refers another — and becomes a case study.',powered:'Powered by  Agent 08 → Agent 01',detail:'A church that gets a real result refers others AND becomes a proof story. Referrals enter as warm leads at Agent 01, and the proof strengthens every funnel. This is the 08 → 01 loop built into the roster.'},
+ {name:'Paid Reinvestment Loop',color:C.slate,nodes:['Spend','Acquire','Revenue','Reinvest'],why:'While LTV : CAC > 3 and payback is short, profit funds the next round of spend.',powered:'Powered by  RevOps 06 (throttle)',detail:'When paid acquisition is switched on, customer revenue funds more spend once payback clears. It only compounds while unit economics hold — Agent 06 watches LTV:CAC and payback as the throttle. (Future lever — not running yet.)'},
+ {name:'Expansion / NRR Loop',color:C.rust,nodes:['Onboard','Realize value','iHub → THRIVE','Renew & deepen'],why:'Existing revenue grows itself — NRR > 100% compounds with zero new logos.',powered:'Powered by  Success 07 · 08',detail:'A church on iHub that realizes value upgrades to iHub + THRIVE, deepening usage and renewing. With NRR above 100%, the existing base grows on its own — the most efficient growth there is.'}
+];
+const TERMS=[
+ {name:'Guides / Content',color:C.gold,f:'Opt-ins(t) = Opt-ins(t-1)\n + Guides × CaptureRate',lever:'guide reach × convert rate',ag:'03'},
+ {name:'Referral',color:C.teal,f:'New = Customers\n × ReferralRate × CVR',lever:'referral rate · time-to-proof',ag:'08 → 01'},
+ {name:'Paid',color:C.slate,f:'Customers = Spend / CAC\n(scale while LTV:CAC ≥ 3)',lever:'CAC · payback months',ag:'06'},
+ {name:'Expansion / NRR',color:C.rust,f:'NRR = (Start + Expansion\n - Churn - Contraction) / Start',lever:'iHub→THRIVE % · churn %',ag:'07 · 08'}
+];
+
+const INFO={
+ orchestration:{label:'AI Orchestration Layer',color:C.teal,desc:'The connective layer that lets the agents actually do the work — each agent reaches the right tool through Composio, reads and writes a shared memory in Notion, and pauses at a human gate before anything sends.',bul:['Notion — system of record & shared memory','Apify — church contact enrichment','GoHighLevel — CRM, opt-in forms, warm email','Instantly — cold-email engine (warm-up + rotation)','HubSpot — Grace’s booking calendar','Granola — call transcripts → instant call prep','Slack — the daily RevOps digest','Draft-first human gate on every outbound action']},
+ revops:{label:'Data & Measurement · RevOps spine',color:C.ink,desc:'Every phase is instrumented so the engine can be tuned, not guessed. Agent 06 keeps the pipeline clean daily and writes a weekly metrics snapshot the board can read.',bul:['Pipeline by Status / Fit / Funnel stage (live dashboards)','Re-engage A/B scoreboard (avatar vs. email)','MRR + renewal rollup on customers','Daily digest in Slack · weekly metrics snapshot','Guardrail metrics: CAC · LTV:CAC · NRR · payback']}
+};
+
+/* ---------- helpers ---------- */
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function ringSVG(nodes,color){
+ const cx=100,cy=100,r=72,N=nodes.length,pt=a=>[cx+r*Math.cos(a*Math.PI/180),cy+r*Math.sin(a*Math.PI/180)];
+ let svg=`<svg viewBox="0 0 200 200" width="100%"><defs><marker id="m_${color.slice(1)}" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="${color}"/></marker></defs>`;
+ const angs=[...Array(N)].map((_,i)=>-90+i*360/N);
+ for(let i=0;i<N;i++){const a0=angs[i]+26,a1=angs[i]+360/N-26,[x0,y0]=pt(a0),[x1,y1]=pt(a1);
+  svg+=`<path d="M${x0.toFixed(1)},${y0.toFixed(1)} A${r},${r} 0 0 1 ${x1.toFixed(1)},${y1.toFixed(1)}" fill="none" stroke="${color}" stroke-width="3" marker-end="url(#m_${color.slice(1)})"/>`;}
+ for(let i=0;i<N;i++){const[x,y]=pt(angs[i]),c=Math.cos(angs[i]*Math.PI/180),s=Math.sin(angs[i]*Math.PI/180);
+  let anc='middle',ox=0,oy=5;if(c>0.4){anc='start';ox=14}else if(c<-0.4){anc='end';ox=-14}if(s<-0.4)oy=-13;else if(s>0.4)oy=20;
+  svg+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="8" fill="${color}"/><text x="${(x+ox).toFixed(1)}" y="${(y+oy).toFixed(1)}" font-size="11" font-weight="700" fill="#211E16" text-anchor="${anc}">${nodes[i]}</text>`;}
+ return svg+'</svg>';
+}
+
+/* ---------- render ---------- */
+document.getElementById('pillars').innerHTML=PILLARS.map((p,i)=>
+ `<div class="pillar" onclick="openPillar(${i})"><span class="tk">›</span><b>${p[1]}</b><span class="d">${p[2]}</span></div>`).join('');
+document.getElementById('ribbon').innerHTML=PADRE.map(p=>p[0]?
+ `<div class="seg" style="color:${p[1]};border-color:${p[1]}">${p[0]}</div>`:`<div class="lab">PADRE</div>`).join('');
+document.getElementById('pipeline').innerHTML=PHASES.map(p=>
+ `<div class="phase" style="border-top-color:${p.color}" onclick="openPhase('${p.id}')">
+   <div class="pno" style="color:${p.color}">${p.no}</div>
+   <h4>${p.name}</h4><div class="meta">${p.meta}</div>
+   <div class="team" style="color:${p.color}">${p.team}</div></div>`).join('');
+document.getElementById('ladder').innerHTML=LADDER.map(l=>
+ `<div class="rung"><div class="rh" style="background:${l.color}"><div><div class="lv">${l.lv}</div><b>${l.name}</b></div><span class="pr">${l.price}</span></div><div class="rb">${l.body}</div></div>`).join('');
+document.getElementById('funnel3').innerHTML=FUNNEL.map(f=>
+ `<div class="fstage" style="border-top-color:${f.color}"><div class="ft" style="color:${f.color}">${f.t}</div><h4>${f.h}</h4>${f.lines.map(l=>`<p>${l}</p>`).join('')}<div class="a">${f.a}</div></div>`).join('');
+
+function agentCard(a,team,i){return `<div class="agent" onclick="openAgent('${team}',${i})">
+  <div class="rule" style="background:${a.color}"></div>
+  <div class="top"><div class="no" style="border-color:${a.color}">${a.no}</div><b>${a.name}</b></div>
+  <div class="body"><div class="trg">TRIGGER</div><div class="trgv">${a.trg}</div>
+   <div class="ho"><b>Handoff:</b> ${a.hoff}</div><div class="more">View workflow →</div></div></div>`;}
+document.getElementById('grid-sales').innerHTML=SALES.map((a,i)=>agentCard(a,'SALES',i)).join('');
+document.getElementById('grid-ref').innerHTML=REF.map((a,i)=>agentCard(a,'REF',i)).join('');
+document.getElementById('loops-grid').innerHTML=LOOPS.map((l,i)=>
+ `<div class="loop" style="border-top-color:${l.color}" onclick="openLoop(${i})"><div class="ring">${ringSVG(l.nodes,l.color)}</div>
+   <div><h4>${l.name}</h4><div class="why" style="color:${l.color}">WHY IT COMPOUNDS</div><p>${l.why}</p><span class="pw">${l.powered}</span></div></div>`).join('');
+document.getElementById('terms').innerHTML=TERMS.map(t=>
+ `<div class="term" style="border-top-color:${t.color}"><b>${t.name}</b><div class="f">${t.f.replace(/\n/g,'<br>')}</div>
+   <div class="lv" style="color:${t.color}">LEVER</div><div class="lvv">${t.lever}</div><div class="ag">Agents ${t.ag}</div></div>`).join('');
+
+/* ---------- modals ---------- */
+const overlay=document.getElementById('overlay'),modal=document.getElementById('modal');
+function show(html){modal.innerHTML=html;overlay.classList.add('open');}
+function closeModal(){overlay.classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+function bullets(arr){return '<ul class="bul">'+arr.map(b=>`<li>${b}</li>`).join('')+'</ul>';}
+
+function openPillar(i){const p=PILLARS[i];
+ show(`<div class="mtop" style="background:${C.gold}"><h3>${p[1]}</h3><span class="x" onclick="closeModal()">×</span></div>
+  <div class="mbody"><p class="mdesc">${p[3]}</p><div class="mlabel">INSIDE</div>${bullets(p[4])}</div>`);}
+function openPhase(id){const p=PHASES.find(x=>x.id===id);
+ const jump=p.jump?`<span class="jump" onclick="closeModal();location.hash='${p.jump}'">Explore ${p.jumpName} →</span>`:'';
+ show(`<div class="mtop" style="background:${p.color}"><h3>${p.no} · ${p.name}</h3><span class="tag">${p.meta}</span><span class="x" onclick="closeModal()">×</span></div>
+  <div class="mbody"><p class="mdesc">${p.desc}</p><div class="mlabel">TEAM</div><p class="mdesc" style="font-size:15px">${p.team}</p>${jump}</div>`);}
+function openInfo(id){const m=INFO[id];
+ show(`<div class="mtop" style="background:${m.color}"><h3>${m.label}</h3><span class="x" onclick="closeModal()">×</span></div>
+  <div class="mbody"><p class="mdesc">${m.desc}</p><div class="mlabel">INSIDE</div>${bullets(m.bul)}</div>`);}
+
+const DATA={SALES,REF};
+function openAgent(team,i){const a=DATA[team][i];
+ const steps=a.steps.map((s,n)=>`<div class="step"><div class="sn">${n+1}</div><div><b>${s[0]}</b><span class="tool">${s[1]}</span></div></div>`).join('');
+ show(`<div class="mtop" style="background:${a.color}"><div class="mno">${a.no}</div><h3>${a.name}</h3><span class="x" onclick="closeModal()">×</span></div>
+  <div class="mbody"><div class="mlabel">TRIGGER</div><div class="mtrg">${a.trg}</div>${steps}
+   <div class="gate"><span class="gt">${a.gtool}</span><div class="gl">◇ REVIEW GATE</div><b>${a.gate}</b></div>
+   <div class="hoff"><div class="hl">HANDOFF</div><b>${a.hoff}</b></div>
+   <div class="escal"><div class="el">⚠ ESCALATE</div><span>${a.esc}</span></div></div>`);}
+function openLoop(i){const l=LOOPS[i];
+ show(`<div class="mtop" style="background:${l.color}"><h3>${l.name}</h3><span class="x" onclick="closeModal()">×</span></div>
+  <div class="mbody"><div style="width:220px;margin:0 auto 6px">${ringSVG(l.nodes,l.color)}</div><p class="mdesc">${l.detail}</p><div><span class="pwbox">${l.powered}</span></div></div>`);}
+</script>
+</body>
+</html>
