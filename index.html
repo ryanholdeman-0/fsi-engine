@@ -44,6 +44,8 @@ section{padding:30px 0}
 .sec-head h2{font-size:30px;color:var(--ink);margin-top:6px;letter-spacing:-.5px}
 .sec-head p{color:var(--mut);margin-top:6px;max-width:820px}
 .hint{font-size:12.5px;color:var(--gold);font-weight:700;margin-top:8px}
+.phasehead{margin:30px 0 14px;padding-left:14px;border-left:5px solid var(--cardbd);font-size:14px;color:var(--mut);font-weight:600}
+.phasehead .pn{font-weight:800;font-size:16px;margin-right:9px}
 
 .stack>*{margin-bottom:14px}
 .band{background:var(--panel);border:1px solid var(--cardbd);border-radius:16px;padding:18px 20px;position:relative}
@@ -102,12 +104,12 @@ section{padding:30px 0}
 @media(max-width:820px){.loops{grid-template-columns:1fr}}
 .loop{background:var(--card);border:1px solid var(--cardbd);border-radius:16px;padding:18px;display:flex;gap:16px;cursor:pointer;transition:.15s;border-top:7px solid var(--gold);align-items:center}
 .loop:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.10)}
-.loop .ring{flex:0 0 200px}
+.loop .ring{flex:0 0 250px}
 .loop h4{font-size:21px;color:var(--ink)}
 .loop .why{font-size:11px;font-weight:800;letter-spacing:1px;margin:8px 0 4px}
 .loop p{font-size:15px;color:var(--txt)}
 .loop .pw{display:inline-block;margin-top:10px;background:var(--goldsoft);border:1px solid var(--cardbd);border-radius:8px;padding:6px 12px;font-size:13px;font-weight:700;color:var(--ink2)}
-@media(max-width:560px){.loop{flex-direction:column}.loop .ring{flex:none;width:200px}}
+@media(max-width:560px){.loop{flex-direction:column}.loop .ring{flex:none;width:250px}}
 
 .hero-eq{background:var(--ink);color:#fff;border-radius:16px;padding:30px;text-align:center}
 .hero-eq .l1{font-size:28px;font-weight:800;font-family:"Courier New",monospace}
@@ -252,9 +254,14 @@ footer{padding:40px 0 60px;color:var(--mut);font-size:13px;border-top:1px solid 
 <section class="wrap" id="team">
   <div class="sec-head"><div class="eyebrow">PADRE · Acquire → Deploy → Retain → Expand</div>
     <h2>The 8-Agent Sales &amp; Success Team</h2>
-    <p>One roster from first touch to renewal. Agent 06 (CRM / RevOps) is the connective tissue; Agent 08 feeds referrals back to Agent 01.</p>
+    <p>One roster from first touch to renewal, split across the Sales, Success and Expand phases. Agent 06 (CRM / RevOps) is the connective tissue; Agent 08 feeds referrals back to Agent 01.</p>
     <div class="hint">Click any agent for its trigger → steps → approval gate → handoff → escalation.</div></div>
+
+  <div class="phasehead" id="phase4"><span class="pn" style="color:var(--teal)">Phase 4 · Sales</span> Acquire — research → audit → outreach → reply triage → booking → proposal · Agents 01–06</div>
   <div class="grid" id="grid-sales"></div>
+
+  <div class="phasehead" id="phase5"><span class="pn" style="color:var(--slate)">Phase 5 · Success</span> Deploy · Retain — onboarding, health, support, renewal · Agents 07–08</div>
+  <div class="grid" id="grid-success"></div>
 </section>
 
 <div class="wrap" style="display:flex;align-items:center;gap:14px;margin-top:30px">
@@ -271,7 +278,7 @@ footer{padding:40px 0 60px;color:var(--mut);font-size:13px;border-top:1px solid 
 </section>
 
 <section class="wrap" id="loops">
-  <div class="sec-head"><div class="eyebrow">What Compounds</div>
+  <div class="sec-head"><div class="eyebrow">Phase 6 · Expand · What Compounds</div>
     <h2>The Four Growth Loops</h2>
     <p>Each loop reinvests its own output into its next input — that's what makes it an engine, not a funnel.</p>
     <div class="hint">Click a loop for its compounding mechanism.</div></div>
@@ -320,9 +327,9 @@ const PHASES=[
    desc:'What FSI sells and at what value — a free guide to capture, iHub to monetize budget churches, iHub + THRIVE as the flagship, and white-glove for maximum LTV + proof.'},
  {id:'funnels',no:'Phase 3',name:'Funnel',meta:'TOFU · MOFU · BOFU',team:'Two funnels · one engine',color:C.gold,jump:'#funnels-sec',jumpName:'the funnel',
    desc:'Demand capture across the funnel — free guides up top, demo + Grace AI + a network-leader webinar in the middle, then Grace AI’s sales portal or a real call at the bottom. Run for both products.'},
- {id:'sales',no:'Phase 4',name:'Sales',meta:'Acquire',team:'Agents 01–06',color:C.teal,jump:'#team',jumpName:'the team',
+ {id:'sales',no:'Phase 4',name:'Sales',meta:'Acquire',team:'Agents 01–06',color:C.teal,jump:'#phase4',jumpName:'the Sales agents',
    desc:'Turn engaged churches into customers — research, audit, outreach, reply triage, booking, proposal — with RevOps keeping every handoff clean.'},
- {id:'success',no:'Phase 5',name:'Success',meta:'Deploy · Retain',team:'Agents 07–08',color:C.slate,jump:'#team',jumpName:'the team',
+ {id:'success',no:'Phase 5',name:'Success',meta:'Deploy · Retain',team:'Agents 07–08',color:C.slate,jump:'#phase5',jumpName:'the Success agents',
    desc:'Deliver first value fast and sustain it — onboarding, health, support, renewal. Where recurring revenue and proof assets are created.'},
  {id:'expand',no:'Phase 6',name:'Expand',meta:'Extend · Expand',team:'Upsell · referral · NRR',color:C.rust,jump:'#loops',jumpName:'the loops',
    desc:'Grow revenue without new logos — iHub → iHub + THRIVE upsell, renewals, and referrals. Where NRR compounds.'}
@@ -397,7 +404,7 @@ const INFO={
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function ringSVG(nodes,color){
  const cx=100,cy=100,r=72,N=nodes.length,pt=a=>[cx+r*Math.cos(a*Math.PI/180),cy+r*Math.sin(a*Math.PI/180)];
- let svg=`<svg viewBox="0 0 200 200" width="100%"><defs><marker id="m_${color.slice(1)}" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="${color}"/></marker></defs>`;
+ let svg=`<svg viewBox="-75 0 350 200" width="100%"><defs><marker id="m_${color.slice(1)}" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="${color}"/></marker></defs>`;
  const angs=[...Array(N)].map((_,i)=>-90+i*360/N);
  for(let i=0;i<N;i++){const a0=angs[i]+26,a1=angs[i]+360/N-26,[x0,y0]=pt(a0),[x1,y1]=pt(a1);
   svg+=`<path d="M${x0.toFixed(1)},${y0.toFixed(1)} A${r},${r} 0 0 1 ${x1.toFixed(1)},${y1.toFixed(1)}" fill="none" stroke="${color}" stroke-width="3" marker-end="url(#m_${color.slice(1)})"/>`;}
@@ -427,7 +434,8 @@ function agentCard(a,team,i){return `<div class="agent" onclick="openAgent('${te
   <div class="top"><div class="no" style="border-color:${a.color}">${a.no}</div><b>${a.name}</b></div>
   <div class="body"><div class="trg">TRIGGER</div><div class="trgv">${a.trg}</div>
    <div class="ho"><b>Handoff:</b> ${a.hoff}</div><div class="more">View workflow →</div></div></div>`;}
-document.getElementById('grid-sales').innerHTML=SALES.map((a,i)=>agentCard(a,'SALES',i)).join('');
+document.getElementById('grid-sales').innerHTML=SALES.slice(0,6).map((a,i)=>agentCard(a,'SALES',i)).join('');
+document.getElementById('grid-success').innerHTML=SALES.slice(6).map((a,i)=>agentCard(a,'SALES',i+6)).join('');
 document.getElementById('grid-ref').innerHTML=REF.map((a,i)=>agentCard(a,'REF',i)).join('');
 document.getElementById('loops-grid').innerHTML=LOOPS.map((l,i)=>
  `<div class="loop" style="border-top-color:${l.color}" onclick="openLoop(${i})"><div class="ring">${ringSVG(l.nodes,l.color)}</div>
@@ -464,7 +472,7 @@ function openAgent(team,i){const a=DATA[team][i];
    <div class="escal"><div class="el">⚠ ESCALATE</div><span>${a.esc}</span></div></div>`);}
 function openLoop(i){const l=LOOPS[i];
  show(`<div class="mtop" style="background:${l.color}"><h3>${l.name}</h3><span class="x" onclick="closeModal()">×</span></div>
-  <div class="mbody"><div style="width:220px;margin:0 auto 6px">${ringSVG(l.nodes,l.color)}</div><p class="mdesc">${l.detail}</p><div><span class="pwbox">${l.powered}</span></div></div>`);}
+  <div class="mbody"><div style="width:280px;margin:0 auto 6px">${ringSVG(l.nodes,l.color)}</div><p class="mdesc">${l.detail}</p><div><span class="pwbox">${l.powered}</span></div></div>`);}
 </script>
 </body>
 </html>
