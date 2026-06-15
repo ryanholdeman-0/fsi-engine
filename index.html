@@ -177,6 +177,9 @@ footer{padding:40px 0 60px;color:var(--mut);font-size:13px;border-top:1px solid 
 .fstage h4{font-size:19px;color:var(--ink);margin:5px 0 8px}
 .fstage p{font-size:14px;color:var(--txt);margin:3px 0}
 .fstage .a{font-size:12.5px;color:var(--mut);margin-top:9px;border-top:1px solid var(--cardbd);padding-top:9px}
+.fstage .flink{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13.5px;font-weight:600;color:var(--txt);text-decoration:none;padding:9px 12px;margin:6px 0;border:1px solid var(--cardbd);border-radius:9px;background:var(--cream);transition:.13s}
+.fstage .flink:hover{border-color:var(--gold);background:#fff;color:var(--goldr)}
+.fstage .flink::after{content:"↗";color:var(--gold);font-weight:800;flex:0 0 auto}
 </style>
 </head>
 <body>
@@ -334,9 +337,20 @@ const LADDER=[
  {lv:'LEVEL 4 · High-Touch',name:'White-glove / meta-network rollouts',price:'Custom',color:C.rust,body:'Hands-on rollouts across multisite churches and meta-networks (denominations / associations) — maximum LTV, and the richest source of proof stories.'}
 ];
 const FUNNEL=[
- {t:'TOFU · Awareness',color:C.gold,h:'Free field guides',lines:['“The Six Pathways to a Flourishing Life” (THRIVE)','“The Connected Church” + 5-min audit (iHub)'],a:'Value first — opt-in, no pitch'},
- {t:'MOFU · Consideration',color:C.teal,h:'Demo + show the fit',lines:['Demo + Grace AI concierge','Frontline Network Leader webinar'],a:'Build trust — earn the conversation'},
- {t:'BOFU · Decision',color:C.rust,h:'Close with Grace',lines:['Sales portal from Grace AI','…or a call with the real Grace'],a:'Decision — buy or book'}
+ {t:'TOFU · Awareness',color:C.gold,h:'Free field guides',a:'Value first — opt-in, no pitch',links:[
+   {label:'Six Pathways landing page — THRIVE',url:'https://church.floso.us/thrive-solutions/six-pathways'},
+   {label:'Connected Church landing page — iHub',url:'https://church.floso.us/floso/campaigns/connected-church'}
+ ]},
+ {t:'MOFU · Consideration',color:C.teal,h:'Demo + show the fit',a:'Build trust — earn the conversation',links:[
+   {label:'Grace AI demo — THRIVE',url:'https://church.floso.us/thrive-solutions/graceai'},
+   {label:'Grace AI demo — FloSo',url:'https://church.floso.us/floso/graceai'},
+   {label:'Frontline Network Leader webinar',url:'https://church.floso.us/thrive-solutions/webinar'}
+ ]},
+ {t:'BOFU · Decision',color:C.rust,h:'Close with Grace',a:'Decision — buy or book',links:[
+   {label:'Grace AI sales portal — THRIVE',url:'https://church.floso.us/thrive-solutions/graceai-sales-portal'},
+   {label:'Grace AI sales portal — FloSo',url:'https://church.floso.us/floso/graceai-sales-portal'},
+   {label:'Book a call with the real Grace',url:'https://meetings.hubspot.com/ggraham6?uuid=94e04362-6742-4595-9a13-4c9515b178bb'}
+ ]}
 ];
 
 /* ---------- agents ---------- */
@@ -406,7 +420,7 @@ document.getElementById('pipeline').innerHTML=PHASES.map(p=>
 document.getElementById('ladder').innerHTML=LADDER.map(l=>
  `<div class="rung"><div class="rh" style="background:${l.color}"><div><div class="lv">${l.lv}</div><b>${l.name}</b></div><span class="pr">${l.price}</span></div><div class="rb">${l.body}</div></div>`).join('');
 document.getElementById('funnel3').innerHTML=FUNNEL.map(f=>
- `<div class="fstage" style="border-top-color:${f.color}"><div class="ft" style="color:${f.color}">${f.t}</div><h4>${f.h}</h4>${f.lines.map(l=>`<p>${l}</p>`).join('')}<div class="a">${f.a}</div></div>`).join('');
+ `<div class="fstage" style="border-top-color:${f.color}"><div class="ft" style="color:${f.color}">${f.t}</div><h4>${f.h}</h4>${f.links.map(l=>`<a class="flink" href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join('')}<div class="a">${f.a}</div></div>`).join('');
 
 function agentCard(a,team,i){return `<div class="agent" onclick="openAgent('${team}',${i})">
   <div class="rule" style="background:${a.color}"></div>
